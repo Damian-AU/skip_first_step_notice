@@ -3,7 +3,7 @@ set plugin_name "skip_first_step_notice"
 namespace eval ::plugins::${plugin_name} {
 	variable author "Damian"
 	variable contact "via Diaspora"
-	variable version 1.0
+	variable version 1.1
 	variable description "monitor for skipping of the profile's first step"
 
 	set ::skipped_first_step_message "---"
@@ -37,10 +37,10 @@ namespace eval ::plugins::${plugin_name} {
                 if {$::de1(current_frame_number) != 0} {
                     if {$::step1_registered != 1} {
                         set ::skipped_first_step_FW 1
-                        set ::settings(skipped_first_step_FW_is_current) 1
                         if {$::settings(skipped_first_step_FW_is_current) == 0} {
                             incr ::settings(skipped_first_step_FW)
                         }
+                        set ::settings(skipped_first_step_FW_is_current) 1
                         popup [translate "Skip First Step error detected"]
                     } else {
                         set ::skipped_first_step_profile 1
@@ -86,7 +86,7 @@ namespace eval ::plugins::${plugin_name} {
             set s "  "
             return $l$::settings(skipped_first_step_FW)$s$current
         }
-    dui add variable "settings_3" 55 662 -font Helv_7 -fill "#7f879a" -anchor "nw" -textvariable {[::plugins::skip_first_step_notice::settings_page_data]}
+    dui add variable "settings_3" 1220 662 -font Helv_7 -fill "#7f879a" -anchor "ne" -textvariable {[::plugins::skip_first_step_notice::settings_page_data]}
 
 
 
